@@ -1,0 +1,50 @@
+.container {
+  background: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--white);
+  height: 200px;
+  padding-top: 77px;
+  clip-path: ellipse(75% 100% at bottom center);
+
+  .label {
+    font-family: var(--playfair-display);
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .timer {
+    display: flex;
+    gap: 30px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .num {
+        text-align: center;
+        display: inline-block;
+        font-family: var(--playfair-display);
+        font-weight: 400;
+        font-size: 40px;
+        position: relative;
+
+        &::after {
+          content: ":";
+          position: absolute;
+          right: -20px;
+        }
+      }
+      &:last-child .num::after {
+        display: none;
+      }
+
+      .label {
+        font-family: var(--playfair-display-sc);
+        font-weight: 400;
+        font-size: 12px;
+      }
+    }
+  }
+}

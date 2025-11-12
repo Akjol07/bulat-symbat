@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  .title {
+    font-family: var(--playfair-display-sc);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--main-color);
+    margin-bottom: 10px;
+  }
+  .desk {
+    font-family: var(--playfair-display);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .mapBtn {
+    border-radius: 10px;
+    padding: 12px 58px;
+    background: var(--main-color);
+    font-family: var(--playfair-display);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 45px;
+    &:hover,
+    &:active {
+      background: #7c6024;
+    }
+  }
+}

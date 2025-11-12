@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#root {
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  max-width: 425px;
+  min-width: 320px;
+  box-shadow: 0 0 8px 5px rgba(34, 60, 80, 0.2);
+  width: 100%;
+}

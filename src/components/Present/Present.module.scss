@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 60px;
+  padding-top: 80px;
+  clip-path: ellipse(120% 100% at bottom center);
+  background-color: var(--white);
+  height: 100vh;
+  .inner {
+    margin-top: 10%;
+  }
+  .textWrapper {
+    padding: 14px 15px 0 15px;
+  }
+  .emblema {
+    margin-bottom: 50px;
+  }
+  .firstText {
+    margin-bottom: 13px;
+    font-family: var(--playfair-display);
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .secondText {
+    font-family: var(--playfair-display);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 15px;
+  }
+
+  .thirdText {
+    font-family: var(--savoye-let);
+    font-size: 48px;
+    color: var(--main-color);
+    margin-bottom: 16px;
+  }
+
+  .fourthText {
+    font-family: var(--playfair-display);
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 45px;
+  }
+}
