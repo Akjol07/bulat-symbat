@@ -30,9 +30,17 @@ export function Hero({ isLocked, setIsLocked }) {
 
   const handleMouseDown = (e) => {
     if (isLocked) return;
+
+    if (!hasPlayedRef.current) {
+      audioRef.current = new Audio("/audio/Dandelions.mp3");
+      audioRef.current.load();
+      hasPlayedRef.current = true;
+    }
+
     isDragging.current = true;
     startClientX.current = e.clientX || e.touches[0].clientX;
     initialSliderPosition.current = sliderPosition;
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
     window.addEventListener("touchmove", handleTouchMove);
