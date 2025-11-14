@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./Hero.module.scss";
 import cn from "classnames";
-import chevron from "../../assets/images/svg/chevron.svg";
+// import chevron from "../../assets/images/svg/chevron.svg";
 
 export function Hero({ isLocked, setIsLocked }) {
   const [sliderPosition, setSliderPosition] = useState(0);
@@ -28,24 +28,24 @@ export function Hero({ isLocked, setIsLocked }) {
     return 0;
   };
 
-  const handleMouseDown = (e) => {
-    if (isLocked) return;
+  // const handleMouseDown = (e) => {
+  //   if (isLocked) return;
 
-    if (!hasPlayedRef.current) {
-      audioRef.current = new Audio("/audio/Dandelions.mp3");
-      audioRef.current.load();
-      hasPlayedRef.current = true;
-    }
+  //   if (!hasPlayedRef.current) {
+  //     audioRef.current = new Audio("/audio/Dandelions.mp3");
+  //     audioRef.current.load();
+  //     hasPlayedRef.current = true;
+  //   }
 
-    isDragging.current = true;
-    startClientX.current = e.clientX || e.touches[0].clientX;
-    initialSliderPosition.current = sliderPosition;
+  //   isDragging.current = true;
+  //   startClientX.current = e.clientX || e.touches[0].clientX;
+  //   initialSliderPosition.current = sliderPosition;
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchend", handleTouchEnd);
-  };
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   window.addEventListener("mouseup", handleMouseUp);
+  //   window.addEventListener("touchmove", handleTouchMove);
+  //   window.addEventListener("touchend", handleTouchEnd);
+  // };
 
   const handleMouseMove = (e) => {
     if (!isDragging.current || isLocked) return;
@@ -71,8 +71,8 @@ export function Hero({ isLocked, setIsLocked }) {
         audioRef.current = new Audio("/audio/Dandelions.mp3");
         hasPlayedRef.current = true;
       }
-      setIsPlaying(true);
       setSliderPosition(maxTranslateX);
+      setIsPlaying(true);
       setIsLocked(true);
       setTimeout(() => {
         const foundElement = document.getElementById("presentTextWrapper");
@@ -91,7 +91,7 @@ export function Hero({ isLocked, setIsLocked }) {
     }
   };
 
-  const handleTouchStart = (e) => handleMouseDown(e);
+  // const handleTouchStart = (e) => handleMouseDown(e);
   const handleTouchMove = (e) => handleMouseMove(e);
   const handleTouchEnd = () => handleMouseUp();
 
@@ -141,6 +141,86 @@ export function Hero({ isLocked, setIsLocked }) {
     };
   }, [isPlaying]);
 
+  const scrollToEndOfPage = (duration = 3000) => {
+    const start = window.scrollY || window.pageYOffset;
+    const end = document.body.scrollHeight - window.innerHeight;
+    const distance = end - start;
+    let startTime = null;
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easeProgress = 0.5 - 0.5 * Math.cos(Math.PI * progress); // плавное easing
+      window.scrollTo(0, start + distance * easeProgress);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const animateSliderToEnd = () => {
+    const maxX = getMaxTranslateX();
+
+    if (!hasPlayedRef.current) {
+      audioRef.current = new Audio("/audio/Dandelions.mp3");
+      audioRef.current.load();
+      hasPlayedRef.current = true;
+    }
+
+    let start = sliderPosition;
+    let startTime = null;
+    const duration = 1000;
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const newPos = start + (maxX - start) * progress;
+
+      setSliderPosition(newPos);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        if (audioRef.current) {
+          audioRef.current.play().catch((err) => console.error(err));
+        }
+        setIsPlaying(true);
+
+        // Лочим
+        setIsLocked(true);
+        currentSliderPositionRef.current = maxX;
+
+        // Scroll вниз
+        setTimeout(() => {
+          const foundElement = document.getElementById("presentTextWrapper");
+          if (foundElement) {
+            foundElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "start",
+            });
+
+            setTimeout(() => {
+              scrollToEndOfPage(9000);
+            }, 700);
+          }
+        }, 100);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     animateSliderToEnd();
+  //   }, 1000);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
   return (
     <div
       className={styles.wrapper}
@@ -151,11 +231,17 @@ export function Hero({ isLocked, setIsLocked }) {
         Сымбат
       </h1>
 
-      <div className={cn(styles.bottom, { [styles.isHidden]: isLocked })}>
-        <h2>WEDDING DAY</h2>
-        <p>Чакырууну ачуу</p>
-        <div ref={containerRef} className={styles.container}>
-          <div className={cn(styles.circle, styles.startCircle)} />
+      <div className={cn(styles.bottom)}>
+        <h2>Приглашение на свадьбу</h2>
+        {/* <p>Чакырууну ачуу</p> */}
+        <div
+          ref={containerRef}
+          className={cn(styles.container, { [styles.isHidden]: isLocked })}
+        >
+          <button className={styles.btn} onClick={animateSliderToEnd}>
+            Чакырууну ачуу
+          </button>
+          {/* <div className={cn(styles.circle, styles.startCircle)} />
           <div className={styles.track} />
           <div className={cn(styles.circle, styles.endCircle)} />
           <div
@@ -166,7 +252,7 @@ export function Hero({ isLocked, setIsLocked }) {
             onTouchStart={handleTouchStart}
           >
             <img src={chevron} alt="chevron" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

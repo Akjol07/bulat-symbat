@@ -47,7 +47,7 @@ export function Address() {
         <br />
         Ресторан “AYAR”
         <br />
-        12.12.2025 17:00
+        12.12.2025 15:00
       </Motion.p>
       <Motion.button
         initial="hidden"
