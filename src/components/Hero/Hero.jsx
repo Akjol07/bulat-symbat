@@ -204,7 +204,7 @@ export function Hero({ isLocked, setIsLocked }) {
             });
 
             setTimeout(() => {
-              scrollToEndOfPage(9000);
+              scrollToEndOfPage(15000);
             }, 700);
           }
         }, 100);
