@@ -46,7 +46,17 @@ export function Address() {
         Бишкек шаары, Фрунзе көчөсү 133
         <br />
         Ресторан “AYAR”
-        <br />
+      </Motion.p>
+      <Motion.p
+        initial="hidden"
+        whileInView="visible"
+        transition={{ duration: 0.6 }}
+        variants={{
+          visible: { opacity: 1, scale: 1 },
+          hidden: { opacity: 0, scale: 0 },
+        }}
+        className={styles.time}
+      >
         12.12.2025 15:00
       </Motion.p>
       <Motion.button
