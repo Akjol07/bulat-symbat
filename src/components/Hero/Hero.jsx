@@ -68,7 +68,7 @@ export function Hero({ isLocked, setIsLocked }) {
     const lockThreshold = maxTranslateX * 0.7;
     if (currentSliderPositionRef.current >= lockThreshold) {
       if (!hasPlayedRef.current) {
-        audioRef.current = new Audio("/audio/Dandelions.mp3");
+        audioRef.current = new Audio("/audio/jax.mp3");
         hasPlayedRef.current = true;
       }
       setSliderPosition(maxTranslateX);
@@ -164,7 +164,7 @@ export function Hero({ isLocked, setIsLocked }) {
     const maxX = getMaxTranslateX();
 
     if (!hasPlayedRef.current) {
-      audioRef.current = new Audio("/audio/Dandelions.mp3");
+      audioRef.current = new Audio("/audio/jax.mp3");
       audioRef.current.load();
       hasPlayedRef.current = true;
     }
