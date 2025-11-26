@@ -20,12 +20,12 @@ export function Ouners() {
       <Motion.h2
         initial="hidden"
         whileInView="visible"
-        transition={{ duration: 0.6 }}
         variants={{
           visible: { opacity: 1, scale: 1 },
           hidden: { opacity: 0, scale: 0 },
         }}
         className={styles.names}
+        transition={{ duration: 0.6 }}
       >
         Чубак & Дамира
       </Motion.h2>

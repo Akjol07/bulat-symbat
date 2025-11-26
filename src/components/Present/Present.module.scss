@@ -21,13 +21,13 @@
   .firstText {
     margin-bottom: 13px;
     font-family: var(--playfair-display);
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 27px;
+    font-weight: 700;
   }
   .secondText {
     font-family: var(--playfair-display);
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 19px;
     color: var(--black);
     margin-bottom: 15px;
   }
@@ -36,13 +36,15 @@
     font-family: var(--savoye-let);
     font-size: 48px;
     color: var(--main-color);
+    font-weight: 700;
     margin-bottom: 16px;
   }
 
   .fourthText {
     font-family: var(--playfair-display);
-    font-size: 16px;
+    font-size: 20px;
     color: var(--black);
     margin-bottom: 45px;
+    font-weight: 600;
   }
 }
